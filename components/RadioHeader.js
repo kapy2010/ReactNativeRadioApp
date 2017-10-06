@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {Left, Body, Right} from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class RadioHeader extends Component {
   render() {
@@ -7,7 +9,21 @@ class RadioHeader extends Component {
       <View style={{flex: 1, flexDirection: 'column'}}>
         <Text style={styles.radio}>RADIO</Text>
         <Text style={styles.onlineMusic}>ONLINE MUSIC</Text>
-        <Text style={styles.genre}>GENRE</Text>
+        <View style={styles.genre}>
+          <Left>
+            <TouchableOpacity>
+              <Icon name="chevron-left" size={40}></Icon>
+            </TouchableOpacity>
+          </Left>
+          <Body>
+            <Text style={{textAlign: 'center'}}>GENRE</Text>
+          </Body>
+          <Right>
+            <TouchableOpacity>
+              <Icon name="chevron-right" size={40}></Icon>
+            </TouchableOpacity>
+          </Right>
+        </View>
       </View>
     );
   }
@@ -16,16 +32,19 @@ class RadioHeader extends Component {
 const styles = {
   radio: {
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold'
   },
   onlineMusic: {
     textAlign: 'center',
+    fontSize: 12,
     paddingTop: 5
   },
   genre: {
-    textAlign: 'center',
-    paddingTop: 50
+    flex: 1,
+    flexDirection: 'row',
+    paddingTop: 50,
+    paddingBottom: 10
   }
 };
 

@@ -20,7 +20,8 @@ export default class App extends Component {
         <Header style={styles.header}>
           <RadioHeader/>
         </Header>
-        <Content></Content>
+        <Content>
+        </Content>
         <Footer style={styles.footer}>
           <RadioFooter/>
         </Footer>
@@ -31,12 +32,14 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   header: {
-    height: 160,
+    height: 180,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2
+    shadowOpacity: 0.2,
+    backgroundColor: '#FBFBFB'
   },
   footer: {
-    height: 180
+    height: 180,
+    backgroundColor: '#FBFBFB'
   }
 });
