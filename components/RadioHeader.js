@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import {Left, Body, Right} from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {View, Text} from 'react-native';
+import {Genre} from "./RadioHeader/Genre";
 
 class RadioHeader extends Component {
   render() {
@@ -9,21 +8,7 @@ class RadioHeader extends Component {
       <View style={{flex: 1, flexDirection: 'column'}}>
         <Text style={styles.radio}>RADIO</Text>
         <Text style={styles.onlineMusic}>ONLINE MUSIC</Text>
-        <View style={styles.genre}>
-          <Left>
-            <TouchableOpacity>
-              <Icon name="chevron-left" size={40}></Icon>
-            </TouchableOpacity>
-          </Left>
-          <Body>
-            <Text style={{textAlign: 'center'}}>GENRE</Text>
-          </Body>
-          <Right>
-            <TouchableOpacity>
-              <Icon name="chevron-right" size={40}></Icon>
-            </TouchableOpacity>
-          </Right>
-        </View>
+        <Genre/>
       </View>
     );
   }
@@ -31,20 +16,17 @@ class RadioHeader extends Component {
 
 const styles = {
   radio: {
+    color: '#393939',
+    paddingTop: 20,
     textAlign: 'center',
-    fontSize: 28,
+    fontSize: 36,
     fontWeight: 'bold'
   },
   onlineMusic: {
+    color: '#BDBDBD',
     textAlign: 'center',
-    fontSize: 12,
+    fontSize: 16,
     paddingTop: 5
-  },
-  genre: {
-    flex: 1,
-    flexDirection: 'row',
-    paddingTop: 50,
-    paddingBottom: 10
   }
 };
 
