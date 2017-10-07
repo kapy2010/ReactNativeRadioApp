@@ -4,7 +4,6 @@ import {
   Container,
   Header,
   Title,
-  Body,
   Content,
   Footer,
   Left,
@@ -32,14 +31,14 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   header: {
-    height: 180,
+    height: 200,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     backgroundColor: '#FBFBFB'
   },
   footer: {
-    height: 180,
+    height: 200,
     backgroundColor: '#FBFBFB'
   }
 });

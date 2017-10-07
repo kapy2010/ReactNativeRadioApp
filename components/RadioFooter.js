@@ -2,30 +2,26 @@ import React, {Component} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Left, Right} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {PlayStopButton} from './RadioFooter/PlayStopButton';
+import {StatusBar} from "./RadioFooter/StatusBar";
 
 class RadioFooter extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
-        <Text style={styles.statusBar}>Status Bar</Text>
-        <View style={styles.statusBarTime}>
-          <Left>
-            <Text>0:01</Text>
-          </Left>
-          <Right>
-            <Text>-2:49</Text>
-          </Right>
-        </View>
+        <StatusBar/>
         <Text style={{textAlign: 'center'}}>TrackPlaying</Text>
         <View style={styles.playerControls}>
           <Left>
-            <TouchableOpacity style={styles.playStop}>
-              <Icon name="play" size={40}/>
-            </TouchableOpacity>
+            <PlayStopButton/>
           </Left>
           <Right>
             <TouchableOpacity style={styles.volume}>
-              <Icon name="volume-up" size={40}/>
+              <Icon name="volume-up" size={40} color='#393939'/>
             </TouchableOpacity>
           </Right>
         </View>
@@ -35,26 +31,13 @@ class RadioFooter extends Component {
 }
 
 const styles = {
-  statusBar: {
-    textAlign: 'center'
-  },
-  statusBarTime: {
-    flex: 1,
-    flexDirection: 'row'
-  },
   playerControls: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-end'
   },
-  playStop: {
-    alignItems: 'flex-start',
-    padding: 20,
-    paddingBottom: 10
-  },
   volume: {
-    alignItems: 'flex-end',
-    padding: 20,
+    paddingRight: 20,
     paddingBottom: 10
   }
 };
