@@ -23,12 +23,14 @@ class PlayStopButton extends Component {
   }
 
   _play() {
+    this.props.togglePlay();
     this._toggleStates();
     this.refs.playView.zoomOut(200);
     this.refs.stopView.zoomIn(200);
   }
 
   _stop() {
+    this.props.togglePlay();
     this._toggleStates();
     this.refs.playView.zoomIn(200);
     this.refs.stopView.zoomOut(200);
