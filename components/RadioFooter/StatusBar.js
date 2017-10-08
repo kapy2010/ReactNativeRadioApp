@@ -12,6 +12,22 @@ class StatusBar extends Component {
       timeElapsed: '0:00',
       timeRemaining: '3:00'
     };
+
+    this._updateStatus = this._updateStatus.bind(this);
+  }
+
+  _updateStatus() {
+    this.state.value < 100 ?
+      this._onSliderChange(this.state.value + 1/1.8) : clearInterval(this.interval);
+  }
+
+  componentWillReceiveProps() {
+    this.props.play ?
+      this.interval = setInterval(this._updateStatus, 1000) : clearInterval(this.interval);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   _calcTime(value) {
@@ -56,7 +72,7 @@ class StatusBar extends Component {
             <Text>{this.state.timeElapsed}</Text>
           </Left>
           <Right>
-            <Text>-{this.state.timeRemaining}</Text>
+            <Text>- {this.state.timeRemaining}</Text>
           </Right>
         </View>
       </View>
@@ -74,6 +90,6 @@ const styles = {
     flex: 1,
     flexDirection: 'row',
   }
-}
+};
 
 export {StatusBar};

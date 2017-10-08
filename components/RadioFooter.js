@@ -8,16 +8,27 @@ import {StatusBar} from "./RadioFooter/StatusBar";
 class RadioFooter extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      play: true
+    };
+
+    this._togglePlay = this._togglePlay.bind(this);
+  }
+
+  _togglePlay() {
+    this.setState({
+      play: !this.state.play
+    });
   }
 
   render() {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
-        <StatusBar/>
+        <StatusBar play={this.state.play}/>
         <Text style={{textAlign: 'center'}}>TrackPlaying</Text>
         <View style={styles.playerControls}>
           <Left>
-            <PlayStopButton/>
+            <PlayStopButton togglePlay={this._togglePlay}/>
           </Left>
           <Right>
             <TouchableOpacity style={styles.volume}>
