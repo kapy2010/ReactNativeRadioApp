@@ -19,13 +19,13 @@ const styles = {
     color: '#393939',
     paddingTop: 20,
     textAlign: 'center',
-    fontSize: 36,
+    fontSize: 32,
     fontWeight: 'bold'
   },
   onlineMusic: {
     color: '#BDBDBD',
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 14,
     paddingTop: 5
   }
 };
