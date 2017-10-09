@@ -16,6 +16,7 @@ class RadioFooter extends Component {
   }
 
   _togglePlay() {
+    this.props.toggleDigitalWaves();
     this.setState({
       play: !this.state.play
     });

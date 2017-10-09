@@ -60,10 +60,11 @@ class StatusBar extends Component {
       <View style={styles.slider}>
         <Slider
           style={7}
+          thumbStyle={{width: 10, height: 10}}
+          trackStyle={{height: 3, backgroundColor: '#D1D3DF'}}
           value={this.state.value}
           onValueChange={value => this._onSliderChange(value)}
-          minimumTrackTintColor='#E5A0DB'
-          maximumTrackTintColor='#D1D3DF'
+          minimumTrackTintColor='black'
           thumbTintColor='#393939'
           maximumValue={100}
         />
