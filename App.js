@@ -35,15 +35,18 @@ export default class App extends Component {
     return Math.random() * (max - min) + min;
   }
 
-  render() {
-    let waves = [...Array(Math.floor(window.width / 9))].map((_, i) => {
+  _returnBars() {
+    return [...Array(Math.floor(window.width / 9))].map((_, i) => {
       return <Rectangle
         key={i}
         windowHeight={window.height}
         play={this.state.play}
-        duration={this._returnAnimationDurations(1000, 2000)}
+        duration={this._returnAnimationDurations(500, 2000)}
       />;
     });
+  }
+
+  render() {
     return (
       <Container>
         <Header style={styles.header}>
@@ -51,7 +54,7 @@ export default class App extends Component {
         </Header>
         <Content style={{backgroundColor: '#D89FD6'}}>
           <View style={styles.body}>
-            {waves}
+            {this._returnBars()}
           </View>
         </Content>
         <Footer style={styles.footer}>
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
   header: {
     height: 180,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.2,
     backgroundColor: '#FBFBFB'
   },
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FBFBFB'
   },
   body: {
-    flex:1,
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-end',
     height: window.height - 360
