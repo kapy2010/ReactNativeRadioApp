@@ -11,7 +11,7 @@ import {
 } from 'native-base';
 import {RadioHeader} from './app/components/RadioHeader';
 import {RadioFooter} from './app/components/RadioFooter';
-import {Rectangle} from './app/components/Rectangle';
+import {RectangleBar} from './app/components/RectangleBar';
 
 const window = Dimensions.get('window');
 
@@ -37,7 +37,7 @@ export default class App extends Component {
 
   _returnBars() {
     return [...Array(Math.floor(window.width / 9))].map((_, i) => {
-      return <Rectangle
+      return <RectangleBar
         key={i}
         windowHeight={window.height}
         play={this.state.play}
