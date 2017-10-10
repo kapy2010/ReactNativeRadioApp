@@ -7,31 +7,31 @@ class PlayStopButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      togglePlay: true,
-      toggleStop: false
+      play: true,
+      stop: false
     };
 
     this._play = this._play.bind(this);
     this._stop = this._stop.bind(this);
   }
 
-  _toggleStates() {
+  _toggleButtons() {
     this.setState({
-      togglePlay: !this.state.togglePlay,
-      toggleStop: !this.state.toggleStop
+      play: !this.state.play,
+      stop: !this.state.stop
     });
   }
 
   _play() {
     this.props.togglePlay();
-    this._toggleStates();
+    this._toggleButtons();
     this.refs.playView.zoomOut(200);
     this.refs.stopView.zoomIn(200);
   }
 
   _stop() {
     this.props.togglePlay();
-    this._toggleStates();
+    this._toggleButtons();
     this.refs.playView.zoomIn(200);
     this.refs.stopView.zoomOut(200);
   }
@@ -40,12 +40,12 @@ class PlayStopButton extends Component {
     return (
       <View style={styles.playStop}>
         <Animatable.View ref="playView">
-          {this.state.togglePlay && <TouchableOpacity onPress={this._play}>
+          {this.state.play && <TouchableOpacity onPress={this._play}>
             <Icon name="play" size={40} color='#393939'/>
           </TouchableOpacity>}
         </Animatable.View>
         <Animatable.View ref="stopView">
-          {this.state.toggleStop && <TouchableOpacity onPress={this._stop}>
+          {this.state.stop && <TouchableOpacity onPress={this._stop}>
             <Icon name="stop" size={40} color='#393939'/>
           </TouchableOpacity>}
         </Animatable.View>
