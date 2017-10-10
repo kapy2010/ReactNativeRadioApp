@@ -9,42 +9,19 @@ class Rectangle extends Component {
 
     this.state = {
       primHeight: 0,
-      secHeight: 0
+      secHeight: 0,
+      toValue: 0,
+      primHeight: 0,
+      secHeight: 0,
+      primPrevPosition: 0,
+      secPrevPosition: 0
     };
 
-    this._animate = this._animate.bind(this);
   }
 
   componentDidMount() {
-
-  }
-
-  componentWillReceiveProps() {
-    if (this.props.play) {
-      this._animate();
-    }
-  }
-
-  _animate() {
-    this.primAnimatedValue.setValue(0);
-    this.secAnimatedValue.setValue(0);
-    Animated.parallel([
-      Animated.timing( this.primAnimatedValue, {
-        toValue: 1,
-        duration: 2000,
-        easing: Easing.linear
-      }),
-      Animated.timing( this.secAnimatedValue, {
-        toValue: 1,
-        duration: 2000,
-        easing: Easing.linear
-      })
-    ]).start(() => this._animate());
-  }
-
-  _setBarHeights() {
     let primHeight = Math.floor(Math.random() * (this.props.windowHeight - 360));
-    const limit=(this.props.windowHeight - 360) * 0.7;
+    const limit = (this.props.windowHeight - 360) * 0.7;
 
     let secHeight = 0;
 
@@ -59,40 +36,58 @@ class Rectangle extends Component {
     });
   }
 
-  render() {
-    let primHeight = Math.floor(Math.random() * (this.props.windowHeight - 360));
-    const limit=(this.props.windowHeight - 360) * 0.7;
-
-    let secHeight = 0;
-
-    if (primHeight > limit) {
-      secHeight = primHeight - limit;
-      primHeight = limit;
+  componentWillReceiveProps() {
+    if (this.props.play) {
+      this._animate();
     }
+  }
 
-    let height1 = this.primAnimatedValue.interpolate({
-      inputRange: [0, 0.5, 1],
-      outputRange: [0, primHeight, 0]
+  _animate() {
+    this.primAnimatedValue.setValue(0);
+    this.secAnimatedValue.setValue(0);
+    this.setState({
+      toValue: Math.random(),
+      primPrevPosition: this.state.toValue * this.state.primHeight,
+      secPrevPosition: this.state.toValue * this.state.secHeight
+    });
+    Animated.parallel([
+      Animated.timing(this.primAnimatedValue, {
+        toValue: this.state.toValue,
+        duration: this.props.duration,
+        easing: Easing.linear
+      }),
+      Animated.timing(this.secAnimatedValue, {
+        toValue: this.state.toValue,
+        duration: this.props.duration,
+        easing: Easing.linear
+      })
+    ]).start(() => this._animate());
+  }
+
+  render() {
+    const whiteBarHeight = this.primAnimatedValue.interpolate({
+      inputRange: [0, this.state.toValue / 2, this.state.toValue],
+      outputRange: [this.state.primPrevPosition, this.state.primHeight, this.state.toValue * this.state.primHeight]
     });
 
-    let height2 = this.secAnimatedValue.interpolate({
-      inputRange: [0, 0.5, 1],
-      outputRange: [0, secHeight, 0]
+    const pinkBarHeight = this.secAnimatedValue.interpolate({
+      inputRange: [0, this.state.toValue / 2, this.state.toValue],
+      outputRange: [this.state.secPrevPosition, this.state.secHeight, this.state.toValue * this.state.secHeight]
     });
 
-    return(
+    return (
       <View>
         <Animated.View style={{
-          width: 5,
-          height: height2,
+          width: 3,
+          height: pinkBarHeight,
           backgroundColor: '#D1D3DF',
-          marginLeft: 5
+          marginLeft: 6
         }}/>
         <Animated.View style={{
-          width: 5,
-          height: height1,
+          width: 3,
+          height: whiteBarHeight,
           backgroundColor: 'white',
-          marginLeft: 5
+          marginLeft: 6
         }}/>
       </View>
 

@@ -13,7 +13,7 @@ import {RadioHeader} from './app/components/RadioHeader';
 import {RadioFooter} from './app/components/RadioFooter';
 import {Rectangle} from './app/components/Rectangle';
 
-const WINDOW_HEIGHT = Dimensions.get('window').height;
+const window = Dimensions.get('window');
 
 export default class App extends Component {
   constructor(props) {
@@ -31,12 +31,17 @@ export default class App extends Component {
     });
   }
 
+  _returnAnimationDurations(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
   render() {
-    let waves = [...Array(37)].map((_, i) => {
+    let waves = [...Array(Math.floor(window.width / 9))].map((_, i) => {
       return <Rectangle
         key={i}
-        windowHeight={WINDOW_HEIGHT}
+        windowHeight={window.height}
         play={this.state.play}
+        duration={this._returnAnimationDurations(1000, 2000)}
       />;
     });
     return (
@@ -73,6 +78,6 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    height: WINDOW_HEIGHT - 360
+    height: window.height - 360
   }
 });
