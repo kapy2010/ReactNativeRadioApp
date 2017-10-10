@@ -9,7 +9,7 @@ A simple radio app UI in react native
  
  ## Demo
  
- ![Alt Text](radioApp.gif)
+ ![Alt Text](radio_app.gif)
 
 
 
