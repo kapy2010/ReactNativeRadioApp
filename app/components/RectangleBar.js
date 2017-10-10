@@ -17,8 +17,8 @@ class RectangleBar extends Component {
     };
   }
 
-  componentWillReceiveProps() {
-    if (this.props.play) {
+  componentWillReceiveProps(propsReceived) {
+    if (propsReceived.play) {
       this.setState({show: true});
     } else {
       this.setState({show: false});
