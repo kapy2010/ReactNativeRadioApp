@@ -17,12 +17,17 @@ class StatusBar extends Component {
   }
 
   _updateStatus() {
+    if (Math.floor(this.state.value) === 100) {
+      clearInterval(this.interval);
+      this.props.stopDigitalWaves();
+    }
+
     this.state.value < 100 ?
       this._onSliderChange(this.state.value + 1/1.8) : clearInterval(this.interval);
   }
 
-  componentWillReceiveProps() {
-    this.props.play ?
+  componentWillReceiveProps(propsReceived) {
+    propsReceived.play ?
       this.interval = setInterval(this._updateStatus, 1000) : clearInterval(this.interval);
   }
 

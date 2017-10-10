@@ -9,27 +9,46 @@ class RadioFooter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      play: true
+      playStatusBar: false
     };
 
-    this._togglePlay = this._togglePlay.bind(this);
+    this._playSong = this._playSong.bind(this);
+    this._stopSong = this._stopSong.bind(this);
+    this._stopDigitalWaves = this._stopDigitalWaves.bind(this);
   }
 
-  _togglePlay() {
-    this.props.toggleDigitalWaves();
+  _playSong() {
     this.setState({
-      play: !this.state.play
+      playStatusBar: true
     });
+    this.props.playDigitalWaves();
+  }
+
+  _stopSong() {
+    this.setState({
+      playStatusBar: false
+    });
+    this._stopDigitalWaves();
+  }
+
+  _stopDigitalWaves() {
+    this.props.stopDigitalWaves();
   }
 
   render() {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
-        <StatusBar play={this.state.play}/>
+        <StatusBar
+          play={this.state.playStatusBar}
+          stopDigitalWaves={this._stopDigitalWaves}
+        />
         <Text style={{textAlign: 'center'}}>TrackPlaying</Text>
         <View style={styles.playerControls}>
           <Left>
-            <PlayStopButton togglePlay={this._togglePlay}/>
+            <PlayStopButton
+              playSong={this._playSong}
+              stopSong={this._stopSong}
+            />
           </Left>
           <Right>
             <TouchableOpacity style={styles.volume}>

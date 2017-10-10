@@ -19,15 +19,22 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      play: true
+      play: false
     };
 
-    this._togglePlay = this._togglePlay.bind(this);
+    this._playDigitalWaves = this._playDigitalWaves.bind(this);
+    this._stopDigitalWaves = this._stopDigitalWaves.bind(this);
   }
 
-  _togglePlay() {
+  _playDigitalWaves() {
     this.setState({
-      play: !this.state.play
+      play: true
+    });
+  }
+
+  _stopDigitalWaves() {
+    this.setState({
+      play: false
     });
   }
 
@@ -58,7 +65,10 @@ export default class App extends Component {
           </View>
         </Content>
         <Footer style={styles.footer}>
-          <RadioFooter toggleDigitalWaves={this._togglePlay}/>
+          <RadioFooter
+            playDigitalWaves={this._playDigitalWaves}
+            stopDigitalWaves={this._stopDigitalWaves}
+          />
         </Footer>
       </Container>
     );
