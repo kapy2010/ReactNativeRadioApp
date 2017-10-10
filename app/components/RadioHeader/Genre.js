@@ -63,9 +63,9 @@ class Genre extends Component {
             <Arrow iconName="chevron-left" direction='left' setDirection={this._setDirection}/>
           </Left>
           <Body>
-            <Text style={{fontSize: 18, color: '#393939'}}>
+            <Animatable.Text ref="view" style={{fontSize: 18, color: '#393939'}}>
               {Object.keys(genres[this.state.genreIndex])[0]}
-            </Text>
+            </Animatable.Text>
           </Body>
           <Right>
             <Arrow iconName="chevron-right" direction='right' setDirection={this._setDirection}/>
