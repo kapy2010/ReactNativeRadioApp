@@ -16,17 +16,18 @@ class RadioHeader extends Component {
 
 const styles = {
   radio: {
-    color: '#393939',
+    color: '#6D6D6D',
     paddingTop: 20,
     textAlign: 'center',
-    fontSize: 32,
-    fontWeight: 'bold'
+    fontSize: 34,
+    letterSpacing: 2
   },
   onlineMusic: {
-    color: '#BDBDBD',
+    color: '#B3B3B4',
     textAlign: 'center',
-    fontSize: 14,
-    paddingTop: 5
+    fontSize: 10,
+    letterSpacing: 3,
+    fontWeight: 'bold'
   }
 };
 

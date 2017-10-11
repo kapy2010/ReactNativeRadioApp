@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Animatable from 'react-native-animatable';
+import {Button} from "./Button";
 
 class PlayStopButton extends Component {
   constructor(props) {
@@ -40,14 +41,10 @@ class PlayStopButton extends Component {
     return (
       <View style={styles.playStop}>
         <Animatable.View ref="playView">
-          {this.state.play && <TouchableOpacity onPress={this._play}>
-            <Icon name="play" size={40} color='#393939'/>
-          </TouchableOpacity>}
+          {this.state.play && <Button name="play" onPress={this._play}/>}
         </Animatable.View>
         <Animatable.View ref="stopView">
-          {this.state.stop && <TouchableOpacity onPress={this._stop}>
-            <Icon name="stop" size={40} color='#393939'/>
-          </TouchableOpacity>}
+          {this.state.stop && <Button name="stop" onPress={this._stop}/>}
         </Animatable.View>
       </View>
     );

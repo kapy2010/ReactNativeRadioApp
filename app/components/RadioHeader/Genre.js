@@ -35,14 +35,14 @@ class Genre extends Component {
   _getPrevButton() {
     return <View>
       <View style={styles.circle}/>
-      <Icon name="ios-arrow-back" color='#393939' size={34} style={{paddingTop: 8, paddingLeft: 15}}/>
+      <Icon name="ios-arrow-back" color='#606060' size={34} style={{paddingTop: 6, paddingLeft: 15}}/>
     </View>;
   }
 
   _getNextButton() {
     return <View>
       <View style={styles.circle}/>
-      <Icon name="ios-arrow-forward" color='#393939' size={34} style={{paddingTop: 8, paddingLeft: 19}}/>
+      <Icon name="ios-arrow-forward" color='#606060' size={34} style={{paddingTop: 6, paddingLeft: 19}}/>
     </View>;
   }
 
@@ -71,15 +71,17 @@ const styles = {
     paddingTop: 30
   },
   genreText: {
-    fontSize: 16,
-    color: '#393939',
+    fontSize: 14,
+    color: '#7C7C7D',
     textAlign: 'center',
-    paddingBottom: 10
+    paddingBottom: 10,
+    letterSpacing: 5,
+    fontWeight: 'bold'
   },
   circle: {
-    width: 50,
-    height: 50,
-    borderRadius: 50/2,
+    width: 47,
+    height: 47,
+    borderRadius: 47/2,
     backgroundColor: '#EEEFF3',
     position: 'absolute'
   }

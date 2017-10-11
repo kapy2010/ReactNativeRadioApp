@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text} from 'react-native';
 import {Left, Right} from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {PlayStopButton} from './RadioFooter/PlayStopButton';
 import {StatusBar} from "./RadioFooter/StatusBar";
+import {Button} from './RadioFooter/Button';
 
 class RadioFooter extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class RadioFooter extends Component {
           play={this.state.playStatusBar}
           stopDigitalWaves={this._stopDigitalWaves}
         />
-        <Text style={{textAlign: 'center'}}>TrackPlaying</Text>
+        <Text style={styles.trackPlaying}>Tycho - Awake</Text>
         <View style={styles.playerControls}>
           <Left>
             <PlayStopButton
@@ -50,10 +50,8 @@ class RadioFooter extends Component {
               stopSong={this._stopSong}
             />
           </Left>
-          <Right>
-            <TouchableOpacity style={styles.volume}>
-              <Icon name="volume-up" size={40} color='#393939'/>
-            </TouchableOpacity>
+          <Right style={styles.volume}>
+            <Button name="volume-up" onPress={null}/>
           </Right>
         </View>
       </View>
@@ -70,6 +68,10 @@ const styles = {
   volume: {
     paddingRight: 20,
     paddingBottom: 10
+  },
+  trackPlaying: {
+    textAlign: 'center',
+    color: '#969696'
   }
 };
 
