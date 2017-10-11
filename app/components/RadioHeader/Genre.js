@@ -7,7 +7,7 @@ import {
 import {
   Body
 } from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-swiper'
 import {genres} from "../../globals";
 
@@ -35,14 +35,14 @@ class Genre extends Component {
   _getPrevButton() {
     return <View>
       <View style={styles.circle}/>
-      <Icon name="chevron-left" color='#393939' size={28} style={{paddingTop: 12, paddingLeft: 11}}/>
+      <Icon name="ios-arrow-back" color='#393939' size={34} style={{paddingTop: 8, paddingLeft: 15}}/>
     </View>;
   }
 
   _getNextButton() {
     return <View>
       <View style={styles.circle}/>
-      <Icon name="chevron-right" color='#393939' size={28} style={{paddingTop: 12, paddingLeft: 15}}/>
+      <Icon name="ios-arrow-forward" color='#393939' size={34} style={{paddingTop: 8, paddingLeft: 19}}/>
     </View>;
   }
 
