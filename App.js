@@ -77,7 +77,7 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   header: {
-    height: 180,
+    height: 210,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.2,

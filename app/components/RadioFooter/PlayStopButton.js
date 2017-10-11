@@ -25,15 +25,15 @@ class PlayStopButton extends Component {
   _play() {
     this.props.playSong();
     this._toggleButtons();
-    this.refs.playView.zoomOut(200);
-    this.refs.stopView.zoomIn(200);
+    this.refs.playView.zoomOut(150);
+    this.refs.stopView.zoomIn(150);
   }
 
   _stop() {
     this.props.stopSong();
     this._toggleButtons();
-    this.refs.playView.zoomIn(200);
-    this.refs.stopView.zoomOut(200);
+    this.refs.playView.zoomIn(150);
+    this.refs.stopView.zoomOut(150);
   }
 
   render() {
