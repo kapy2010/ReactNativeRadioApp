@@ -32,15 +32,32 @@ class Genre extends Component {
     });
   }
 
+  _getPrevButton() {
+    return <View>
+      <View style={styles.circle}/>
+      <Icon name="chevron-left" color='#393939' size={28} style={{paddingTop: 12, paddingLeft: 11}}/>
+    </View>;
+  }
+
+  _getNextButton() {
+    return <View>
+      <View style={styles.circle}/>
+      <Icon name="chevron-right" color='#393939' size={28} style={{paddingTop: 12, paddingLeft: 15}}/>
+    </View>;
+  }
+
   render() {
     return (
-      <View style={{flex: 1, flexDirection: 'column'}}>
+      <View style={{flex: 1, flexDirection: 'column', paddingRight: 16}}>
+        <Body>
         <Swiper showsButtons
-                prevButton={<Icon name="chevron-left" color='#393939' size={28}/>}
-                nextButton={<Icon name="chevron-right" color='#393939' size={28}/>}
+                width={340}
+                prevButton={this._getPrevButton()}
+                nextButton={this._getNextButton()}
                 showsPagination={false}>
           {this._returnThumbnails()}
         </Swiper>
+        </Body>
       </View>
     );
   }
@@ -58,6 +75,13 @@ const styles = {
     color: '#393939',
     textAlign: 'center',
     paddingBottom: 10
+  },
+  circle: {
+    width: 50,
+    height: 50,
+    borderRadius: 50/2,
+    backgroundColor: '#EEEFF3',
+    position: 'absolute'
   }
 };
 
