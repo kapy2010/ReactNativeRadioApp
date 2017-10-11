@@ -65,20 +65,20 @@ class StatusBar extends Component {
       <View style={styles.slider}>
         <Slider
           style={7}
-          thumbStyle={{width: 10, height: 10}}
-          trackStyle={{height: 3, backgroundColor: '#D1D3DF'}}
+          thumbStyle={{width: 8, height: 8, backgroundColor: '#6D6D6D'}}
+          trackStyle={{height: 2, backgroundColor: '#F0F1F5'}}
           value={this.state.value}
           onValueChange={value => this._onSliderChange(value)}
-          minimumTrackTintColor='black'
+          minimumTrackTintColor='#E5A0DB'
           thumbTintColor='#393939'
           maximumValue={100}
         />
         <View style={styles.statusBarTime}>
           <Left>
-            <Text>{this.state.timeElapsed}</Text>
+            <Text style={styles.time}>{this.state.timeElapsed}</Text>
           </Left>
           <Right>
-            <Text>- {this.state.timeRemaining}</Text>
+            <Text style={styles.time}>- {this.state.timeRemaining}</Text>
           </Right>
         </View>
       </View>
@@ -95,6 +95,10 @@ const styles = {
   statusBarTime: {
     flex: 1,
     flexDirection: 'row',
+  },
+  time: {
+    color: '#575757',
+    fontWeight: 'bold'
   }
 };
 
