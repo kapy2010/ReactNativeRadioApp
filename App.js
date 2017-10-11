@@ -12,6 +12,7 @@ import {
 import {RadioHeader} from './app/components/RadioHeader';
 import {RadioFooter} from './app/components/RadioFooter';
 import {RectangleBar} from './app/components/RectangleBar';
+import LinearGradient from 'react-native-linear-gradient';
 
 const window = Dimensions.get('window');
 
@@ -59,10 +60,12 @@ export default class App extends Component {
         <Header style={styles.header}>
           <RadioHeader/>
         </Header>
-        <Content style={{backgroundColor: '#D89FD6'}}>
+        <Content>
+          <LinearGradient colors={['#A67EC0', '#B889C7', '#E7A8DD']} style={styles.linearGradient}>
           <View style={styles.body}>
             {this._returnBars()}
           </View>
+          </LinearGradient>
         </Content>
         <Footer style={styles.footer}>
           <RadioFooter
