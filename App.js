@@ -1,56 +1,15 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {
   Container,
-  Header,
-  Title,
-  Content,
-  Footer,
-  Left,
-  Right
+  Header
 } from 'native-base';
-import {RadioHeader} from './app/components/RadioHeader';
-import {RadioFooter} from './app/components/RadioFooter';
-import {RectangleBar} from './app/components/RectangleBar';
-
-const window = Dimensions.get('window');
+import {RadioHeader} from "./app/components/Header/RadioHeader";
+import {RadioBody} from './app/components/Body/RadioBody';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      play: false
-    };
-
-    this._playDigitalWaves = this._playDigitalWaves.bind(this);
-    this._stopDigitalWaves = this._stopDigitalWaves.bind(this);
-  }
-
-  _playDigitalWaves() {
-    this.setState({
-      play: true
-    });
-  }
-
-  _stopDigitalWaves() {
-    this.setState({
-      play: false
-    });
-  }
-
-  _returnAnimationDurations(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
-  _returnBars() {
-    return [...Array(Math.floor(window.width / 9))].map((_, i) => {
-      return <RectangleBar
-        key={i}
-        windowHeight={window.height}
-        play={this.state.play}
-        duration={this._returnAnimationDurations(500, 2000)}
-      />;
-    });
   }
 
   render() {
@@ -59,17 +18,7 @@ export default class App extends Component {
         <Header style={styles.header}>
           <RadioHeader/>
         </Header>
-        <Content style={{backgroundColor: '#D89FD6'}}>
-          <View style={styles.body}>
-            {this._returnBars()}
-          </View>
-        </Content>
-        <Footer style={styles.footer}>
-          <RadioFooter
-            playDigitalWaves={this._playDigitalWaves}
-            stopDigitalWaves={this._stopDigitalWaves}
-          />
-        </Footer>
+        <RadioBody/>
       </Container>
     );
   }
@@ -82,15 +31,5 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.2,
     backgroundColor: '#FBFBFB'
-  },
-  footer: {
-    height: 180,
-    backgroundColor: '#FBFBFB'
-  },
-  body: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    height: window.height - 360
   }
 });
