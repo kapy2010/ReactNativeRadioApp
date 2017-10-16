@@ -5,7 +5,7 @@ A simple radio app UI in react native
 
  Use `npm install` to install dependencies
  
- Run `yarn start` to start the app
+ Run `react-native run-ios` to start the app
  
  ## Demo
  
