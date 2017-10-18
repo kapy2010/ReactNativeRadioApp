@@ -8,46 +8,78 @@
 
 #import "OutputVolume.h"
 #import "React/RCTLog.h"
-#import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
 @interface OutputVolume ()
 {
   AVAudioPlayer *_audioPlayer;
+  NSTimer *_playerTimer;
 }
 @end
 
+
 @implementation OutputVolume
+
+#pragma mark - Public
+
+//Initialize the audio player
+- (instancetype)init
+{
+  self = [super init];
+  if (self) {
+    [self configureAudioPlayer];
+  }
+  return self;
+}
+
+- (void)playMusic {
+  
+  [_audioPlayer play];
+  [_audioPlayer setMeteringEnabled:YES];
+  
+  if (!_playerTimer) {
+    RCTLog(@"Inside the timer");
+    _playerTimer = [NSTimer scheduledTimerWithTimeInterval:0.02
+                            target:self
+                            selector:@selector(monitorAudioPlayer:)
+                            userInfo:nil
+                            repeats:YES];
+  }
+  
+}
 
 RCT_EXPORT_MODULE();
 
-// We can send back a promise to our JavaScript environment :)
+// React Methods
 RCT_EXPORT_METHOD(get)
 {
-  float volume = [AVAudioSession sharedInstance].outputVolume;
-  NSString* volumeString = [NSString stringWithFormat:@"%f", volume];
-  
+  [self playMusic];
+}
+
+#pragma mark - Private
+
+- (void) configureAudioPlayer {
+  // Create audio player
+  NSError *error = nil;
   NSString *path = [NSString stringWithFormat:@"%@/drum01.mp3", [[NSBundle mainBundle] resourcePath]];
   NSURL *soundUrl = [NSURL fileURLWithPath:path];
+  _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:&error];
   
-  // Create audio player object and initialize with URL to sound
-  _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
-  
-  if ([_audioPlayer play]) {
-    RCTLog(@"Song played");
-  } else {
-    RCTLog(@"Song not playing.......");
+  if (error) {
+    RCTLog(@"Error setting up audio player: %@", error.debugDescription);
   }
+}
+
+- (void) monitorAudioPlayer: (NSTimer*) timer {
   
-  RCTLog(@"duration: %f", (float)_audioPlayer.duration);
-  RCTLog(@"number of channels: %f", (float)_audioPlayer.numberOfChannels);
+  RCTLog(@"monitoring.........");
+  [_audioPlayer updateMeters];
   
-//  if (volumeString) {
-//    resolve(volumeString);
-//  } else {
-//    reject(@"get_error", @"Error getting system volume", nil);
-//  }
-  
+  for (int i=0; i<_audioPlayer.numberOfChannels; i++)
+  {
+    //Log the peak and average power
+    RCTLog(@"%d %0.2f %0.2f", i, [_audioPlayer peakPowerForChannel:i],[_audioPlayer averagePowerForChannel:i]);
+  }
 }
 
 @end

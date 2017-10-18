@@ -10,4 +10,8 @@
 #import "React/RCTBridgeModule.h"
 
 @interface OutputVolume : NSObject <RCTBridgeModule>
+
+- (void)playMusic;
+- (void)monitorAudioPlayer: (NSTimer*) timer;
+
 @end
