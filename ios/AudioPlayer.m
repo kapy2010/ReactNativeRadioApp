@@ -1,24 +1,24 @@
 //
-//  OutputVolume.m
+//  AudioPlayer.m
 //  ReactNativeRadioApp
 //
 //  Created by kapil on 16/10/17.
 //  Copyright © 2017 Facebook. All rights reserved.
 //
 
-#import "OutputVolume.h"
+#import "AudioPlayer.h"
 #import "React/RCTLog.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface OutputVolume ()
+@interface AudioPlayer ()
 {
   AVAudioPlayer *_audioPlayer;
-  NSTimer *_playerTimer;
+  NSTimer *timer;
 }
 @end
 
 
-@implementation OutputVolume
+@implementation AudioPlayer
 
 #pragma mark - Public
 
@@ -37,23 +37,52 @@
   [_audioPlayer play];
   [_audioPlayer setMeteringEnabled:YES];
   
-  if (!_playerTimer) {
-    RCTLog(@"Inside the timer");
-    _playerTimer = [NSTimer scheduledTimerWithTimeInterval:0.02
-                            target:self
-                            selector:@selector(monitorAudioPlayer:)
-                            userInfo:nil
-                            repeats:YES];
-  }
   
+  timer = [NSTimer timerWithTimeInterval:0.02
+                          target:self
+                          selector:@selector(monitorAudioPlayer:)
+                          userInfo:nil
+                          repeats:YES];
+  [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+  
+}
+
+- (void) stopMusic {
+  
+  [_audioPlayer stop];
+  [timer invalidate];
+  timer = nil;
+}
+
+- (int) getDuration {
+  return [_audioPlayer duration];
 }
 
 RCT_EXPORT_MODULE();
 
 // React Methods
-RCT_EXPORT_METHOD(get)
+RCT_EXPORT_METHOD(play)
 {
   [self playMusic];
+}
+
+RCT_EXPORT_METHOD(stop)
+{
+  [self stopMusic];
+}
+
+RCT_REMAP_METHOD(getDurationOfSong,
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+{
+  int duration = [self getDuration];
+  NSString* durationString = [NSString stringWithFormat:@"%d", duration];
+
+  if (durationString) {
+    resolve(durationString);
+  } else {
+    reject(@"get_error", @"Error getting duration", nil);
+  }
 }
 
 #pragma mark - Private
@@ -72,13 +101,12 @@ RCT_EXPORT_METHOD(get)
 
 - (void) monitorAudioPlayer: (NSTimer*) timer {
   
-  RCTLog(@"monitoring.........");
   [_audioPlayer updateMeters];
   
   for (int i=0; i<_audioPlayer.numberOfChannels; i++)
   {
     //Log the peak and average power
-    RCTLog(@"%d %0.2f %0.2f", i, [_audioPlayer peakPowerForChannel:i],[_audioPlayer averagePowerForChannel:i]);
+//    RCTLog(@"%d %0.2f %0.2f", i, [_audioPlayer peakPowerForChannel:i],[_audioPlayer averagePowerForChannel:i]);
   }
 }
 
