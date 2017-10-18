@@ -52,6 +52,7 @@
 		790772463F23421F9DFC7C36 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CDD2FAAA0E3345A4B9BE3EC4 /* Entypo.ttf */; };
 		80B3FD41259C40648BBE68A7 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B535688F427A45F7A94CD1AB /* MaterialCommunityIcons.ttf */; };
 		822DED321F95623C00B27EBA /* OutputVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 822DED311F95623C00B27EBA /* OutputVolume.m */; };
+		826184F71F96C9D40048CF3A /* drum01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 826184F61F96C9CA0048CF3A /* drum01.mp3 */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8688862D68034A0BB6BBCA48 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30746B4BB38F4B0AA0738152 /* SimpleLineIcons.ttf */; };
 		86F1913E4F8E42CB94D68A1F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A3577E0F68248FBA0976E5F /* SimpleLineIcons.ttf */; };
@@ -353,9 +354,9 @@
 		6C6528F02B2A40C2805FAE58 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7D4D6DB6FDB544BCBE85D04D /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		82286AD71F96AD2A0034E7B8 /* drum01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drum01.mp3; sourceTree = "<group>"; };
 		822DED301F95623C00B27EBA /* OutputVolume.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutputVolume.h; sourceTree = "<group>"; };
 		822DED311F95623C00B27EBA /* OutputVolume.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutputVolume.m; sourceTree = "<group>"; };
+		826184F61F96C9CA0048CF3A /* drum01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drum01.mp3; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		A0764C418A4747B69433D24B /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -516,12 +517,12 @@
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				826184F61F96C9CA0048CF3A /* drum01.mp3 */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				82CCA6F51F96AC5000A1114C /* Sounds */,
 				822DED301F95623C00B27EBA /* OutputVolume.h */,
 				822DED311F95623C00B27EBA /* OutputVolume.m */,
 			);
@@ -589,14 +590,6 @@
 				822DED2C1F955BD600B27EBA /* libBVLinearGradient.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		82CCA6F51F96AC5000A1114C /* Sounds */ = {
-			isa = PBXGroup;
-			children = (
-				82286AD71F96AD2A0034E7B8 /* drum01.mp3 */,
-			);
-			path = Sounds;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -1130,6 +1123,7 @@
 				E44EB56B877F4F4FADA75360 /* Entypo.ttf in Resources */,
 				16BEE986C2874D65B76F2081 /* EvilIcons.ttf in Resources */,
 				71212A3CB0314B1487E1BC99 /* FontAwesome.ttf in Resources */,
+				826184F71F96C9D40048CF3A /* drum01.mp3 in Resources */,
 				5CBB9B86A99044D5BCC650FE /* Foundation.ttf in Resources */,
 				23F65B6888954AB99EF4BE8A /* Ionicons.ttf in Resources */,
 				39B06508CF034CDEAD18BB75 /* MaterialIcons.ttf in Resources */,
