@@ -1,25 +1,35 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, NativeModules} from 'react-native';
 import {Left, Right} from 'native-base';
 import Slider from "react-native-slider";
+
+var AudioPlayer = NativeModules.AudioPlayer;
 
 class StatusBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       value: 0,
-      songTime: 180,
+      songTime: 0,
       timeElapsed: '0:00',
-      timeRemaining: '3:00'
+      timeRemaining: ''
     };
 
     this._updateStatus = this._updateStatus.bind(this);
+  }
+
+  componentDidMount() {
+    AudioPlayer.getDurationOfSong().then(duration => {
+      this.setState({songTime: parseInt(duration)});
+      this.setState({timeRemaining: this._returnTime(duration)});
+    });
   }
 
   _updateStatus() {
     if (Math.floor(this.state.value) === 100) {
       clearInterval(this.interval);
       this.props.stopDigitalWaves();
+      AudioPlayer.stop();
     }
 
     this.state.value < 100 ?
