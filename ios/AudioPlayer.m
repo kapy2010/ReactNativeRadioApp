@@ -14,6 +14,7 @@
 {
   AVAudioPlayer *_audioPlayer;
   NSTimer *timer;
+  float powerLevel;
 }
 @end
 
@@ -85,6 +86,19 @@ RCT_REMAP_METHOD(getDurationOfSong,
   }
 }
 
+RCT_REMAP_METHOD(getPowerLevel,
+                 findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  NSString* powerLevelString = [NSString stringWithFormat:@"%f", powerLevel];
+  
+  if (powerLevelString) {
+    resolve(powerLevelString);
+  } else {
+    reject(@"get_error", @"Error getting power level", nil);
+  }
+}
+
 #pragma mark - Private
 
 - (void) configureAudioPlayer {
@@ -105,8 +119,7 @@ RCT_REMAP_METHOD(getDurationOfSong,
   
   for (int i=0; i<_audioPlayer.numberOfChannels; i++)
   {
-    //Log the peak and average power
-//    RCTLog(@"%d %0.2f %0.2f", i, [_audioPlayer peakPowerForChannel:i],[_audioPlayer averagePowerForChannel:i]);
+    powerLevel = pow(10, (0.05 * [_audioPlayer averagePowerForChannel:i]));
   }
 }
 
