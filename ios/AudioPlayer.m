@@ -39,7 +39,7 @@
   [_audioPlayer setMeteringEnabled:YES];
   
   
-  timer = [NSTimer timerWithTimeInterval:0.02
+  timer = [NSTimer timerWithTimeInterval:0.5
                           target:self
                           selector:@selector(monitorAudioPlayer:)
                           userInfo:nil

@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import {View, Dimensions} from 'react-native';
 import {Content, Footer} from 'native-base';
+import {returnRandomBetween} from "../../globals";
 import {RadioFooter} from "./Footer/RadioFooter";
 import {RectangleBar} from "./Content/RectangleBar";
 import LinearGradient from 'react-native-linear-gradient';
 
 const window = Dimensions.get('window');
+
+const defaultBarHeights = [...Array(Math.floor(window.width / 10))].map((_, i) => {
+  return returnRandomBetween(0.2, 0.25) * (window.height - 360);
+});
 
 class RadioBody extends Component {
   constructor(props) {
@@ -30,17 +35,14 @@ class RadioBody extends Component {
     });
   }
 
-  _returnAnimationDurations(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
   _returnBars() {
-    return [...Array(Math.floor(window.width / 9))].map((_, i) => {
+    return [...Array(Math.floor(window.width / 10))].map((_, i) => {
       return <RectangleBar
         key={i}
         windowHeight={window.height}
+        defaultBarHeight={defaultBarHeights[i]}
         play={this.state.digitalWaves}
-        duration={this._returnAnimationDurations(500, 2000)}
+        duration={returnRandomBetween(1000, 1500)}
       />;
     });
   }
