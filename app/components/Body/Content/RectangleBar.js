@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {View, Animated, Easing} from 'react-native';
+import {View, Animated, Easing, NativeModules} from 'react-native';
 import {FadeAnimation} from './FadeAnimation';
+
+var AudioPlayer = NativeModules.AudioPlayer;
 
 class RectangleBar extends Component {
   constructor(props) {
@@ -9,56 +11,61 @@ class RectangleBar extends Component {
 
     this.state = {
       show: false,
+      defaultBarHeight: this.props.defaultBarHeight,
       primBarHeight: 0,
-      secBarHeight: 0,
-      toValue: 0,
-      primBarPrevPos: 0,
-      secBarPrevPos: 0
+      secBarHeight: 0
     };
+
+    this._setPower = this._setPower.bind(this);
+  }
+
+  componentDidMount() {
+    this._animate();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   componentWillReceiveProps(propsReceived) {
     if (propsReceived.play) {
       this.setState({show: true});
+      this.interval = setInterval(this._setPower, 500);
     } else {
+      clearInterval(this.interval);
       this.setState({show: false});
     }
   }
 
-  componentDidMount() {
-    this._animate();
-    this._setBarHeights();
-  }
+  _setPower() {
+    AudioPlayer.getPowerLevel().then(powerLevel => {
+      let primBarHeight = Math.floor(powerLevel * (this.props.windowHeight - 420));
+      const limit = (this.props.windowHeight - 420) * 0.8;
+      let secBarHeight = 0;
 
-  _setBarHeights() {
-    let primBarHeight = Math.floor(Math.random() * (this.props.windowHeight - 360));
-    const limit = (this.props.windowHeight - 360) * 0.7;
-    let secBarHeight = 0;
+      if (primBarHeight > limit) {
+        secBarHeight = primBarHeight - limit;
+        primBarHeight = limit;
+      }
 
-    if (primBarHeight > limit) {
-      secBarHeight = primBarHeight - limit;
-      primBarHeight = limit;
-    }
-
-    this.setState({
-      primBarHeight: primBarHeight,
-      secBarHeight: secBarHeight
+      this.setState({
+        primBarHeight: primBarHeight,
+        secBarHeight: secBarHeight
+      });
     });
   }
+
 
   _animate() {
     this.animatedValue.setValue(0);
 
     this.setState({
-      toValue: Math.random(),
-      primBarPrevPos: this.state.toValue * this.state.primBarHeight,
-      secBarPrevPos: this.state.value * this.state.secBarHeight
     });
 
     Animated.timing(
       this.animatedValue,
       {
-        toValue: this.state.toValue,
+        toValue: 1,
         duration: this.props.duration,
         easing: Easing.linear
       }
@@ -67,18 +74,17 @@ class RectangleBar extends Component {
 
 
   render() {
-    const {toValue, primBarPrevPos, primBarHeight, secBarPrevPos, secBarHeight, show} = this.state;
+    const {primBarHeight, secBarHeight, show, defaultBarHeight} = this.state;
 
     const baseBarHeight = this.animatedValue.interpolate({
-      inputRange: [0, toValue / 2, toValue],
-      outputRange: [primBarPrevPos, primBarHeight, toValue * primBarHeight]
+      inputRange: [0, 0.5, 1],
+      outputRange: [defaultBarHeight, primBarHeight, defaultBarHeight]
     });
 
     const topBarHeight = this.animatedValue.interpolate({
-      inputRange: [0, toValue / 2, toValue],
-      outputRange: [secBarPrevPos, secBarHeight, toValue * secBarHeight]
+      inputRange: [0, 0.5, 1],
+      outputRange: [0, secBarHeight, 0]
     });
-
 
     return (
       <FadeAnimation visible={show}>

@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, NativeModules} from 'react-native';
 import {Left, Right} from 'native-base';
 import {PlayStopButton} from './PlayStopButton';
 import {StatusBar} from "./StatusBar";
 import {Button} from './Button';
+
+var AudioPlayer = NativeModules.AudioPlayer;
 
 class RadioFooter extends Component {
   constructor(props) {
@@ -22,6 +24,7 @@ class RadioFooter extends Component {
       playStatusBar: true
     });
     this.props.playDigitalWaves();
+    AudioPlayer.play();
   }
 
   _stopSong() {
@@ -29,6 +32,7 @@ class RadioFooter extends Component {
       playStatusBar: false
     });
     this._stopDigitalWaves();
+    AudioPlayer.stop();
   }
 
   _stopDigitalWaves() {
