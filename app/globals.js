@@ -26,4 +26,8 @@ function generateLink(genre) {
   return `https://png.icons8.com/${genre}/ios7/50`;
 }
 
-export {genres};
+function returnRandomBetween(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+export {genres, returnRandomBetween};
