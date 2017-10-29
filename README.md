@@ -1,5 +1,5 @@
 ## Radio App in React Native
-A simple radio app UI in react native
+Trying to mimic [radio interface](https://www.uplabs.com/posts/web-radio-interface-ux-ui-music-player-animation) in React Native.
 
 ### Installation
 
