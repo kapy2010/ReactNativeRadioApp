@@ -1,5 +1,3 @@
-# expo
-.expo/
 # OSX
 #
 .DS_Store
@@ -42,12 +40,6 @@ yarn-error.log
 buck-out/
 \.buckd/
 *.keystore
-
-# android key
-android/.gradle
-android/app/my-release-key.keystore
-
-ios/build
 
 # fastlane
 #
